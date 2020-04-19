@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var d3jsRouter = require('./routes/d3js');
 
 var app = express();
 
@@ -21,11 +22,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bootstrap', express.static(path.join(__dirname + '/node_modules/bootstrap/dist')));
 app.use('/jquery', express.static(path.join(__dirname + '/node_modules/jquery/dist')));
 app.use('/datatables', express.static(path.join(__dirname + '/node_modules/datatables.net')));
-app.use('/datatables_bs4', express.static(path.join(__dirname + '/node_modules/datatables.net-bs4')))
+app.use('/datatables_bs4', express.static(path.join(__dirname + '/node_modules/datatables.net-bs4')));
+app.use('/d3', express.static(path.join(__dirname + '/node_modules/d3/dist')))
 
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/d3js', d3jsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
