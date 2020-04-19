@@ -10,5 +10,9 @@ html
     script(src='/datatables/js/jquery.dataTables.min.js')
     script(src='/datatables_bs4/js/dataTables.bootstrap4.min.js')
     script(src='/d3/d3.min.js')
+    script(src='/javascripts/main.js')
   body
-    block content
+    #loader-background
+      #loader
+    #main.animate-bottom
+      block content

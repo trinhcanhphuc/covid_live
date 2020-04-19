@@ -5,12 +5,6 @@ block content
   p Welcome to #{title}
   table#countries-statistic.table.table-striped.table-bordered(style='width:100%')
     thead
-      tr
-        th Country
-        th Deaths
-        th Cumulative Deaths
-        th Confirmed
-        th Cumulative Confirmed
     tbody
 
   script.
@@ -44,16 +38,22 @@ block content
       });
     });
     promise.then((countries_statistic) => {
-      $.each(countries_statistic, (index, country_statistic) => {
-        appendCountryStatistic(country_statistic);
-      })
+      addTableHeader(['Country', 'Deaths', 'Cumulative Deaths', 'Confirmed', 'Cumulative Confirmed']);
+      addTableContent(countries_statistic);
     }).then(() => {
       $('table#countries-statistic').DataTable({
         "scrollY": "500px",
         "scrollCollapse": true,
         "paging": false
       });
+      showPage();
     });
+
+    function addTableContent(countries_statistic) {
+      $.each(countries_statistic, (index, country_statistic) => {
+        appendCountryStatistic(country_statistic);
+      })
+    }
 
     function appendCountryStatistic(country_statistic) {
       $('table#countries-statistic tbody').append(`
@@ -65,4 +65,13 @@ block content
           <td>${country_statistic['Cumulative Confirmed']}</td>
         </tr>
       `);
+    }
+
+    function addTableHeader(headerList) {
+      $('table#countries-statistic thead').append('<tr></tr>');
+      $(headerList).each((index, header) => {
+        $('table#countries-statistic thead tr').append(`
+          <td>${header}</td>
+        `);
+      });
     }
