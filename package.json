@@ -13,8 +13,11 @@
     "datatables.net-bs4": "^1.10.20",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "font-awesome": "^4.7.0",
+    "highcharts": "^8.0.4",
     "http-errors": "~1.6.3",
     "jquery": "^3.5.0",
+    "jquery-ui": "github:jquery/jquery-ui",
     "morgan": "~1.9.1",
     "pug": "^2.0.4"
   }
