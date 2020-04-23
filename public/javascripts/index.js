@@ -210,11 +210,16 @@ $("#mapDropdown").change(function () {
       },
 
       mapNavigation: {
-        enabled: true
+        enabled: true,
+        enableMouseWheelZoom: false,
+        buttonOptions: {
+          verticalAlign: 'bottom'
+        }
       },
 
       colorAxis: {
         min: 0,
+        max: 1000,
         stops: [
           [0, '#EFEFFF'],
           [0.5, Highcharts.getOptions().colors[0]],
@@ -233,6 +238,7 @@ $("#mapDropdown").change(function () {
         mapData: mapGeoJSON,
         joinBy: ['hc-key', 'key'],
         name: 'Random data',
+        cursor: 'pointer',
         states: {
           hover: {
             color: Highcharts.getOptions().colors[2]
@@ -264,8 +270,8 @@ $("#mapDropdown").change(function () {
         name: "Separators",
         data: Highcharts.geojson(mapGeoJSON, 'mapline'),
         nullColor: 'gray',
-        showInLegend: false,
-        enableMouseTracking: false
+        showInLegend: true,
+        enableMouseTracking: true
       }]
     });
 
