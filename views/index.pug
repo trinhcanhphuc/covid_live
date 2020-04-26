@@ -1,13 +1,10 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
 
   #demo-wrapper
   #mapBox
-    #up
-    .selector
+    .selector.d-none
       button#btn-prev-map.prev-next
         i.fa.fa-angle-left
       select#mapDropdown.ui-widget.combobox
@@ -28,9 +25,8 @@ block content
   script(src='/highcharts/highmaps.js')
   script(src='/javascripts/jquery-ui.js')
   script(src='/javascripts/jquery.combobox.js')
-  link(href='/stylesheets/jquery-ui.css' rel='stylesheet')
-  link(href='/font-awesome/css/font-awesome.min.css' rel='stylesheet')
 
   script.
     var global_data = !{global_data};
+
   script(src='/javascripts/index.js')
