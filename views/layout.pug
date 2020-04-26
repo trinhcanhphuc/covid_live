@@ -2,6 +2,7 @@ doctype html
 html
   head
     title= title
+    <link rel="icon" href="/images/favicon.ico">
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
     link(rel='stylesheet', href='/datatables_bs4/css/dataTables.bootstrap4.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
@@ -13,5 +14,12 @@ html
   body
     #loader-background
       #loader
+
+    .topnav
+      img(id='logo' src='/images/logo.png')
+      a.active(href='#home') Home
+      a(href='#news') News
+      a(href='#contact') Contact
+
     #main.animate-bottom
       block content
