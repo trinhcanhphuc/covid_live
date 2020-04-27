@@ -100,3 +100,11 @@ a {
   display: none;
   text-align: center;
 }
+
+#statistics.position-absolute {
+  bottom: 50px;
+  background: whitesmoke;
+  padding: 20px;
+  border: 1px solid #adb5bd;
+  border-radius: 8px;
+}

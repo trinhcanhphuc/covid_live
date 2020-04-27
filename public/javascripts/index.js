@@ -50,7 +50,16 @@ promise.then((countries_statistic) => {
   showMap(countries_statistic);
   return countries_statistic;
 }).then((countries_statistic) => {
+  var initialValue = 0;
+  var total_confirm_cases = countries_statistic.reduce(function (accumulator, currentValue) {
+    return accumulator + parseInt(currentValue['Cumulative Confirmed']);
+  },initialValue)
+  var total_deaths = countries_statistic.reduce(function (accumulator, currentValue) {
+    return accumulator + parseInt(currentValue['Cumulative Deaths']);
+  },initialValue)
   setTimeout(() => {
+    $('#statistics #confirm-cases').text(total_confirm_cases.toLocaleString('vi'));
+    $('#statistics #deaths').text(total_deaths.toLocaleString('vi'));
     showPage();
   }, 1500);
   addTableHeader(['Country', 'Confirmed Total', 'Confirmed Today', 'Deaths Total', 'Deaths Today']);
@@ -214,7 +223,8 @@ function showMap(countries_statistic) {
             enabled: true,
             enableMouseWheelZoom: false,
             buttonOptions: {
-              verticalAlign: 'bottom'
+              verticalAlign: 'bottom',
+              align: 'right'
             }
           },
 

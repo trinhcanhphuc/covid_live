@@ -1,9 +1,9 @@
 extends layout
 
 block content
-
+  h1 Coronavirus (COVID-19)
   #demo-wrapper
-  #mapBox
+  #mapBox.position-relative
     .selector.d-none
       button#btn-prev-map.prev-next
         i.fa.fa-angle-left
@@ -11,8 +11,13 @@ block content
       button#btn-next-map.prev-next
         i.fa.fa-angle-right
     #container
+    #statistics.position-absolute
+      h5#confirm-cases.mb-0.font-weight-bold
+      small Confirmed Cases
+      h5#deaths.mb-0.mt-3.font-weight-bold
+      small Deaths
 
-  table#countries-statistic.table.table-striped.table-bordered(style='width:100%')
+  table#countries-statistic.table.table-striped.table-bordered
     thead
     tbody
 
