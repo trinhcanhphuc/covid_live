@@ -248,6 +248,19 @@ function showMap(countries_statistic) {
               }]
           },
 
+          yAxis: {
+            type: "datetime",
+            ordinal: false,
+            events: {
+              afterSetExtremes() {
+                let btn = document.querySelector('#reset-zoom');
+                btn.onclick = () => {
+                  this.chart.zoomOut();
+                };
+              }
+            }
+          },
+
           legend: {
             layout: 'horizontal',
             align: 'center',
@@ -260,7 +273,7 @@ function showMap(countries_statistic) {
                 return '> ' + this.from;
               }
               return this.from + ' - ' + this.to;
-          },
+            },
           },
 
           tooltip: {
