@@ -20,6 +20,41 @@ var nationals = [
   'UG', 'UA', 'AE', 'TZ', 'US', 'VI', 'UY', 'UZ', 'VE', 'VN', 'YE',
   'ZM', 'ZW'
 ];
+var nationalsName = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua and Barbuda", "Argentina","Armenia", "Aruba",
+  "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize",
+  "Benin", "Bermuda", "Bhutan", "Bolivia (Plurinational State of)", "Bonaire, Sint Eustatius and Saba", "Bosnia and Herzegovina", "Botswana", "Brazil", "British Virgin Islands",
+  "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Cayman Islands", "Central African Republic",
+  "Chad", "Chile", "China", "Colombia", "Congo", "Costa Rica", "Côte d’Ivoire", "Croatia", "Cuba", "Curacao",
+  "Cyprus", "Czechia", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
+  "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France",
+  "French Guiana", "French Polynesia", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland",
+  "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Holy See",
+  "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Isle of Man", "Israel",
+  "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kosovo[1]", "Kuwait", "Kyrgyzstan",
+  "Lao People's Democratic Republic", "Latvia", "Lebanon", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi",
+  "Malaysia", "Maldives", "Mali", "Malta", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Monaco",
+  "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Nepal", "Netherlands", "New Caledonia", "New Zealand",
+  "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Northern Mariana Islands (Commonwealth of the)", "Norway", "occupied Palestinian territory, including east Jerusalem", "Oman", "Pakistan", "Panama",
+  "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Republic of Korea", "Republic of Moldova",
+  "Réunion", "Romania", "Russian Federation", "Rwanda", "Saint Barthélemy", "Saint Kitts and Nevis", "Saint Lucia", "Saint Martin", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines",
+  "San Marino" ,"Sao Tome and Principe" ,"Saudi Arabia" ,"Senegal" ,"Serbia" ,"Seychelles" ,"Sierra Leone" ,"Singapore" ,"Sint Maarten" ,"Slovakia",
+  "Slovenia", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland",
+  "Syrian Arab Republic", "Thailand", "The United Kingdom", "Timor-Leste", "Togo", "Trinidad and Tobago", "Tunisia", "Turkey", "Turks and Caicos Islands", "Uganda",
+  "Ukraine", "United Arab Emirates", "United Republic of Tanzania", "United States of America", "United States Virgin Islands", "Uruguay", "Uzbekistan", "Venezuela (Bolivarian Republic of)", "Viet Nam", "Yemen", "Zambia", "Zimbabwe"];
+
+init();
+
+function init() {
+  nationals.map((national, index) => {
+    $('#all-countries').append(`<option value=${national}>${nationalsName[index]}</option>`);
+  });
+  $('#all-countries').change(() => {
+    trendChart($('#all-countries').val());
+  });
+  setTimeout(() => {
+    trendChart(nationals.shift());
+  }, 1000);
+}
 
 var promise = new Promise(function (resolve, reject) {
   var countries_statistic = [];
@@ -362,12 +397,11 @@ function showMap(countries_statistic) {
 
 trendChart();
 
-function trendChart() {
+function trendChart(national) {
   new Promise((resolve, reject) => {
-    var america_data = global_data.filter(row => row['Country'] === 'US');
+    var america_data = global_data.filter(row => row['Country'] === national);
     resolve(america_data);
   }).then((america_data) => {
-    console.log(america_data);
     len = america_data.length,
     i = 0,
     data = [];
@@ -378,7 +412,6 @@ function trendChart() {
           y: Number.parseInt(america_data[i]['Cumulative Confirmed'])
         }
     }
-    console.log(data);
     Highcharts.chart('trend-chart', {
       title: {
         text: 'All The World'
@@ -392,12 +425,6 @@ function trendChart() {
         type: 'datetime'
       },
 
-      yAxis: {
-        title: {
-          text: 'Number Of Confirmed'
-        }
-      },
-
       legend: {
         layout: 'vertical',
         align: 'right',
@@ -405,24 +432,9 @@ function trendChart() {
       },
 
       series: [{
-        name: 'Installation',
+        name: 'Number Of Confirmed',
         data: data
-      }],
-
-      // responsive: {
-      //   rules: [{
-      //     condition: {
-      //       maxWidth: 500
-      //     },
-      //     chartOptions: {
-      //       legend: {
-      //         layout: 'horizontal',
-      //         align: 'center',
-      //         verticalAlign: 'bottom'
-      //       }
-      //     }
-      //   }]
-      // }
+      }]
     });
   });
 }
